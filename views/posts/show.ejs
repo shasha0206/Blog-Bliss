@@ -1,0 +1,103 @@
+
+<% layout("/layouts/boilerplate")%>
+<body>
+<div class="row mt-3">
+    <div class="col-8 mb-3">
+        <h3> <%=post.title%> </h3>
+    </div>
+    <br>
+    <div class="card border-0" style="width: 40rem;">
+      <img src="<%=post.image.url%>" class="card-img-top" alt="post_image">
+    </div>
+    <div class="card ms-auto border-0" style="width: 40rem;">
+    
+        <div class="card-body">
+          <h5 class="card-title">Post Details</h5>
+          <p class="card-text">Posted by : <%=post.owner.username%></p>
+          <p class="card-text">Posted on : <%=new Date(post.createdAt).toLocaleString()%></p>
+          <% if (new Date(post.updatedAt).getTime() !== new Date(post.createdAt).getTime()) { %>
+            <p class="card-text">Last updated on : <%= new Date(post.updatedAt).toLocaleString() %></p>
+        <% } %>
+        
+        <% if(currUser && currUser._id.equals(post.owner._id)){ %>
+        <div class="btns">
+
+            <a href="/posts/<%=post._id%>/edit" class="btn btn-dark col-0.5 offset-3 edit-btn ms-0">Edit</a><br>
+            <form method="POST" action="/posts/<%=post._id%>?_method=DELETE">
+                <button class="btn btn-dark offset-3 delete-btn ms-0 ">Delete</button>
+            </form>
+
+        </div>
+       <% } %>
+
+        </div>
+      </div>
+    <div class="mt-3 post-content">
+        <p><%=post.content%></p>
+    </div>
+       
+        
+        <div class="col-8 mb-3">
+        
+          <% if(currUser) { %>
+
+            <h4>Leave a Review</h4>
+            <form action="/posts/<%=post._id%>/reviews" method="POST" class="needs-validation" novalidate>
+              <div class="mb-3 mt-3">
+              <label for="rating" class="form-label">Rating</label>
+              <fieldset class="starability-slot" id="rating">
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+            </div>
+
+              <div class="mb-3 mt-3">
+                <label for="comment" class="form-label">Comments</label>
+                <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
+                <div class="invalid-feedback">
+                    Please add some commens for review
+                  </div>
+              </div>
+              
+              <button class="btn mb-3 submit-btn">Submit</button>
+            </form>
+            
+            <%}%>
+            
+         <p><b>All Reviews</b></p>
+           
+          <div class="row">
+            <% for(review of post.reviews){ %>
+                <div class="card col-5 ms-3 mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">@<%= review.author.username %></h5>
+                        <p class="starability-result card-text" data-rating="<%= review.rating %>">
+                        </p>
+                        <p class="card-text"><%= review.comment %></p>
+                        
+                    </div>
+                    <form class="mb-3 mt-3" method="POST" action="/posts/<%= post._id %>/reviews/<%= review._id %>?_method=DELETE">
+                        <button class="btn btn-sm btn-dark delete-btn">Delete</button>
+                    </form>
+
+                </div>
+                <% } if(!post.reviews.length){ %>
+                <p>No reviews yet. Be the first to leave a review!</p>
+
+                <% } %>
+
+            </div>
+                
+        </div> 
+</div>
+
+    </body>

@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate")%>
+
+<body>
+    
+    <div class="row"></div>
+    <div class="col-8 mt-3">
+        <!-- <br><br> -->
+
+        <h3 class="offset-6">Edit Post</h3>
+    <form method="POST" action="/posts/<%=post.id%>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" value="<%=post.title%>" name="post[title]" class="form-control" required>
+            <div class="invalid-feedback">Title should be valid.</div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <textarea name="post[content]" class="form-control" rows="20" required><%=post.content%></textarea>
+            <div class="invalid-feedback">Please input some content to post</div>
+        </div>
+        <div>
+            Original Post Image&nbsp;
+            <img src="<%=originalImageUrl%>" alt="Original_Image" style="width:13rem; height:13rem;">
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Upload New Image</label>
+            <input type="file" name="post[image]"  class="form-control">
+            
+           
+        </div>
+        
+        <br><br>
+        <button class="btn btn-dark edit-btn mt-3">Edit</button>
+        <br><br>
+
+    </form>
+    </div>
+    
+ 
+   
+</body>

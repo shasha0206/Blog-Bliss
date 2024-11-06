@@ -1,0 +1,29 @@
+<% layout("/layouts/boilerplate")%>
+<body>
+    
+    <h3>All Posts</h3>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+        
+        <% for( let post of allPosts){ %>
+            <a href="/posts/<%=post._id%>" class="post-link">
+            <div class="card col post-card" >
+                <img src="<%=post.image.url%>" class="card-img-top" alt="post_image" style="height:20rem;">
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                  <p class="card-text">
+                    <b><%=post.title%></b><br>
+                     by <%=post.owner.username%>
+                    
+                </p>
+                </div>
+              </div>
+              </a>
+              <%}%>
+            
+
+    </div>
+ 
+    
+
+</body>
+
