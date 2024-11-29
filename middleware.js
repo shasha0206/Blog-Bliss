@@ -17,7 +17,7 @@ module.exports.isLoggedIn=(req,res,next)=>{
         req.flash('error', message);
         return res.redirect('/login');
     }
-    next();
+    next(); 
 };
 
 module.exports.saveRedirectUrl=(req,res,next)=>{
