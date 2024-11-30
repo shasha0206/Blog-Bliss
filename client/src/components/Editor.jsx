@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Toaster, toast } from "react-hot-toast";
@@ -9,6 +10,7 @@ const Editor = () => {
   const [image, setImage] = useState(null);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,6 +45,16 @@ const Editor = () => {
       toast.error('Error creating post');
     }
   };
+
+  useEffect(() => {
+    let isLoggedIn = localStorage.getItem('isLoggedIn') === "true";
+    if (!isLoggedIn) {
+        localStorage.setItem('addpostsrm', 'You must be logged in to post.');
+        navigate('/signin');
+    }
+}, []); 
+
+
 
   return (
     <div className="col-8 offset-2 mt-3">
