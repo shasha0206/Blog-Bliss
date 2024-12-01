@@ -112,13 +112,13 @@ const ProfilePage = () => {
           <h2>Settings</h2>
         </div>
         <div
-          style={styles.sidebarItem}
+          style={styles.sidebarItem} className="sidebarItem"
           onClick={() => setIsEditing(!isEditing)}
         >
           <FaUserEdit style={styles.icon} />
           <span>{isEditing ? "Cancel Edit" : "Edit Profile"}</span>
         </div>
-        <div style={styles.sidebarItem}>
+        <div className="sidebarItem" style={styles.sidebarItem}>
           <FaKey style={styles.icon} />
           <span>Change Password</span>
         </div>
@@ -235,11 +235,13 @@ const styles = {
   },
   sidebar: {
     width: "300px",
-    backgroundColor: "#343a40",
-    color: "#ffffff",
+    backgroundColor: "#f8f9fa",
+    color: "#000",
     display: "flex",
     flexDirection: "column",
     padding: "20px",
+    marginBottom: "0.5rem",
+    border: "1px solid #e0e0e0"
   },
   sidebarItem: {
     display: "flex",
@@ -300,7 +302,7 @@ const styles = {
   uploadButton: {
     marginTop: "10px",
     padding: "8px 16px",
-    backgroundColor: "#007bff",
+    backgroundColor: "#4d718e",
     color: "#fff",
     border: "none",
     borderRadius: "4px",
@@ -351,7 +353,7 @@ const styles = {
   },
   updateButton: {
     padding: "10px 20px",
-    backgroundColor: "#28a745",
+    backgroundColor: "#4d8e8b",
     color: "#fff",
     border: "none",
     borderRadius: "4px",

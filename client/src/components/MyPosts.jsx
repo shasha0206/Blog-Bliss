@@ -61,13 +61,13 @@ const MyPosts = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container mb-2">
       <Toaster />
       <h3>My Posts</h3>
       <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
         {posts.length > 0 ? (
           posts.map((post) => (
-            <div key={post._id} className="card col post-card">
+            <div key={post._id} className="card col post-card index-card">
               <img
                 src={`data:image/jpeg;base64,${post.image}`}
                 className="card-img-top"
@@ -76,8 +76,7 @@ const MyPosts = () => {
                 onClick={() => handlePostClick(post._id)}
               />
               <div className="card-body" style={{ cursor: 'pointer' }} onClick={() => handlePostClick(post._id)}>
-                <h5 className="card-title">{post.title}</h5>
-                <p className="card-text">{post.content.substring(0, 100)}...</p>
+                <p className="card-text"><b>{post.title}</b><br /> Posted on :{new Date(post.createdAt).toLocaleString()}</p>
                 
               </div>
             </div>

@@ -23,8 +23,8 @@ app.use(express.json()); //it converts json data coming frontend into json objec
 app.use(cors()); //allows data tranfer between different ports since default allows all header and orgins and mathods(post get delete , etc)
 
 // MongoDB Connection
-const DB_URL = process.env.DB_URL;
-mongoose.connect(DB_URL)
+const db_url= process.env.DB_URL;
+mongoose.connect(db_url)
     .then(() => console.log('MongoDB connection successful'))
     .catch(error => console.log(`MongoDB connection failed due to ${error}`));
 
