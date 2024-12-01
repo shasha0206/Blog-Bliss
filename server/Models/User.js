@@ -19,8 +19,7 @@ const userSchema = new mongoose.Schema({
      maxLength: 200 
     }, // Optional bio from first schema
   profileImage: {
-     url: String,
-     filename: String,
+     type: String,
     }, // Stores image path from first schema
   socialLinks: { // Social links from first schema
     facebook: String,
