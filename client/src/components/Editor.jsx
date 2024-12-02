@@ -25,7 +25,7 @@ const Editor = () => {
 
 
     try {
-      const response = await axios.post('http://localhost:3000/posts', formData, {
+      const response = await axios.post('https://blog-bliss-backend.onrender.com/posts', formData, {
         headers: {
           // including both text data and binary data
           'Content-Type': 'multipart/form-data',
