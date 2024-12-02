@@ -20,7 +20,7 @@ const EditPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/posts/${postId}`);
+        const response = await axios.get(`https://blog-bliss-backend.onrender.com/posts/${postId}`);
         const postData = response.data.post;
         const originalImageUrl = response.data.originalImageUrl;
 
@@ -68,7 +68,7 @@ const EditPost = () => {
     }
 
     try {
-      await axios.put(`http://localhost:3000/posts/${postId}`, formData, {
+      await axios.put(`https://blog-bliss-backend.onrender.com/posts/${postId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
