@@ -28,7 +28,7 @@ const ProfilePage = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3000/profile", {
+        const response = await axios.get("https://blog-bliss-backend.onrender.com/profile", {
           headers: { "auth-token": token },
         });
 
@@ -80,7 +80,7 @@ const ProfilePage = () => {
         formData.append("profilePic", fileInputRef.current.files[0]); // Profile picture
       }
 
-      await axios.put("http://localhost:3000/profile", formData, {
+      await axios.put("https://blog-bliss-backend.onrender.com/profile", formData, {
         headers: {
           "auth-token": token,
           "Content-Type": "multipart/form-data",
