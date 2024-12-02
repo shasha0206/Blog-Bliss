@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 const Navbar = () => {
-
     const location = useLocation();
     const hideMyPosts = location.pathname === '/Dashboard';
     const hideLogout = location.pathname === '/Dashboard';
@@ -22,7 +21,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar navbar-expand-md bg-body-light border-bottom sticky-top mb-2">
+        <nav className="navbar navbar-expand-lg bg-body-light border-bottom sticky-top mb-2">
             <div className="container-fluid">
                 <Link className="navbar-brand">
                     <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#4d718e">
@@ -30,59 +29,72 @@ const Navbar = () => {
                     </svg>
                 </Link>
 
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+                {/* Hamburger Button */}
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        <Link className="nav-link nav-ele" to="/">
-                            BlogBliss
-                        </Link>
-                        <Link className="nav-link nav-ele" to="/">
-                            Explore
-                        </Link>
-                       
-                        <Link className="nav-link nav-ele" to="/Editor">
-                            Add New Post
-                        </Link>
-                       
-                        {
-                                isLoggedIn ?
-                                    <Link className="nav-link nav-ele" to="/Dashboard">
-                                        Dashboard
-                                    </Link> : ""
-                            }
-                        
-                        {/* Only render My Posts when logged in and not on the Dashboard */}
-                        {isLoggedIn && !hideMyPosts && (
-                            <Link className="nav-link nav-ele" to="/MyPosts">My Posts</Link>
+                {/* Collapsible Content */}
+                <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <Link className="nav-link nav-ele" to="/">BlogBliss</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link nav-ele" to="/">Explore</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link nav-ele" to="/Editor">Add New Post</Link>
+                        </li>
+                        {isLoggedIn && (
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link nav-ele" to="/Dashboard">Dashboard</Link>
+                                </li>
+                                {!hideMyPosts && (
+                                    <li className="nav-item">
+                                        <Link className="nav-link nav-ele" to="/MyPosts">My Posts</Link>
+                                    </li>
+                                )}
+                            </>
                         )}
-                        
+                    </ul>
 
-                    </div>
-
-                    <div className="navbar-nav ms-auto">
-                        <Link className="nav-link nav-ele m-auto" to="/about">
-                            About Us
-                        </Link>
-              
-                        <Link className="nav-link nav-ele m-auto" to="/feedback">Feedback
-                        </Link> 
+                    {/* Right-Aligned Links */}
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item">
+                            <Link className="nav-link nav-ele m-auto" to="/about">About Us</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link nav-ele m-auto" to="/feedback">Feedback</Link>
+                        </li>
                         {!isLoggedIn ? (
                             <>
-                                <Link className="nav-link nav-ele" to="/signup">
-                                    Sign Up
-                                </Link>
-                                <Link className="nav-link nav-ele" to="/signin">
-                                    Login
-                                </Link>
+                                <li className="nav-item">
+                                    <Link className="nav-link nav-ele" to="/signup">Sign Up</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link nav-ele" to="/signin">Login</Link>
+                                </li>
                             </>
                         ) : (
                             <>
-                               {!hideLogout && ( <span className="nav-link nav-ele m-auto" style={{ cursor: 'pointer' }} onClick={handleLogout}>
-                                    Logout
-                                </span>)}
+                                {!hideLogout && (
+                                    <li className="nav-item">
+                                        <span className="nav-link nav-ele m-auto" style={{ cursor: 'pointer' }} onClick={handleLogout}>
+                                            Logout
+                                        </span>
+                                    </li>
+                                )}
+                                <li className="nav-item">
                                 <Link className="nav-link nav-ele" to="/profile">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -93,9 +105,10 @@ const Navbar = () => {
                                 >
                                     <path d="M227.04-264.95q58.84-39.35 120.52-60.11 61.68-20.77 132.44-20.77 70.76 0 133.05 21.04 62.3 21.05 120.58 59.92 40.44-49.91 58.88-102.74 18.43-52.84 18.43-112.39 0-139.76-95.58-235.35t-235.33-95.59q-139.75 0-235.36 95.59-95.61 95.59-95.61 235.35 0 59.46 18.65 112.26 18.65 52.79 59.33 102.79Zm252.84-179.88q-59.04 0-99.25-40.32-40.22-40.32-40.22-99.24 0-58.93 40.34-99.24 40.34-40.31 99.37-40.31 59.04 0 99.25 40.43 40.22 40.44 40.22 99.37 0 58.92-40.34 99.11-40.34 40.2-99.37 40.2Zm-.15 371.53q-84.29 0-158.59-31.99-74.3-31.98-129.4-87.31-55.1-55.34-86.77-129.4Q73.3-396.06 73.3-480.32q0-84.25 32.02-158.34t87.31-129.04q55.29-54.96 129.36-87.06 74.08-32.1 158.34-32.1 84.27 0 158.34 32.1 74.08 32.1 129.03 87.06 54.96 54.95 87.06 129.13 32.1 74.18 32.1 158.39 0 84.21-32.1 158.24-32.1 74.02-87.06 129.31-54.95 55.29-129.22 87.31T479.73-73.3Z" />
                                 </svg></Link>
+                                </li>
                             </>
                         )}
-                    </div>
+                    </ul>
                 </div>
             </div>
         </nav>
