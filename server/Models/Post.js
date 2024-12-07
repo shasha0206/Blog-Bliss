@@ -7,11 +7,15 @@ const postSchema = new mongoose.Schema({
         type: String, required: true 
     },
     image: { 
-        type: String 
+        url: {
+           type: String,
+           required: true,
+        },
+        filename: {
+            type: String,
+            required: true,
+        },
     },
-    createdAt: { 
-        type: Date, default: Date.now
-     },
     user: {
          type: mongoose.Schema.Types.ObjectId, ref: 'User' 
         },
@@ -28,7 +32,7 @@ const postSchema = new mongoose.Schema({
             createdAt: { type: Date, default: Date.now },
         },
     ], // Add comments field
-});
+},{timestamps: true});
 
 const Post = mongoose.model('Post', postSchema);
 export default Post;
